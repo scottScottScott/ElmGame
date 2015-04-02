@@ -1,0 +1,442 @@
+Elm.Main = Elm.Main || {};
+Elm.Main.make = function (_elm) {
+   "use strict";
+   _elm.Main = _elm.Main || {};
+   if (_elm.Main.values)
+   return _elm.Main.values;
+   var _op = {},
+   _N = Elm.Native,
+   _U = _N.Utils.make(_elm),
+   _L = _N.List.make(_elm),
+   _P = _N.Ports.make(_elm),
+   $moduleName = "Main",
+   $Basics = Elm.Basics.make(_elm),
+   $Color = Elm.Color.make(_elm),
+   $Graphics$Collage = Elm.Graphics.Collage.make(_elm),
+   $Graphics$Element = Elm.Graphics.Element.make(_elm),
+   $Keyboard = Elm.Keyboard.make(_elm),
+   $List = Elm.List.make(_elm),
+   $Signal = Elm.Signal.make(_elm),
+   $Text = Elm.Text.make(_elm),
+   $Time = Elm.Time.make(_elm),
+   $Window = Elm.Window.make(_elm);
+   var input = function () {
+      var delta = $Time.fps(20);
+      return A2($Signal.sampleOn,
+      delta,
+      A4($Signal.map3,
+      F3(function (v0,v1,v2) {
+         return {ctor: "_Tuple3"
+                ,_0: v0
+                ,_1: v1
+                ,_2: v2};
+      }),
+      delta,
+      $Keyboard.arrows,
+      $Window.dimensions));
+   }();
+   var render = F2(function (_v0,
+   m) {
+      return function () {
+         switch (_v0.ctor)
+         {case "_Tuple2":
+            return function () {
+                 var speedEndWhit = $Text.color($Color.white)($Text.fromString(" mph"));
+                 var speedFrntWhit = $Text.color($Color.white)($Text.fromString("Speed: "));
+                 var speedEnd = $Text.color($Color.black)($Text.fromString(" mph"));
+                 var speedFrnt = $Text.color($Color.black)($Text.fromString("Speed: "));
+                 var depthEndWhit = $Text.color($Color.white)($Text.fromString(" ft"));
+                 var depthFrntWhit = $Text.color($Color.white)($Text.fromString("Altitude: "));
+                 var depthEnd = $Text.color($Color.black)($Text.fromString(" ft"));
+                 var depthFrnt = $Text.color($Color.black)($Text.fromString("Altitude: "));
+                 var subTitle = $Graphics$Collage.toForm($Graphics$Element.opacity(m.titleOpac - 0.1)($Text.centered($Text.typeface(_L.fromArray(["futura"]))($Text.color($Color.white)($Text.height(25)($Text.fromString("An Homage to Rawkin\'s 2006 Dolphin Olympics")))))));
+                 var title = $Graphics$Collage.move({ctor: "_Tuple2"
+                                                    ,_0: 0
+                                                    ,_1: 40})($Graphics$Collage.toForm($Graphics$Element.opacity(m.titleOpac)($Text.centered($Text.typeface(_L.fromArray(["futura"]))($Text.bold($Text.color($Color.white)($Text.height(50)($Text.fromString("Manatee Simulator 2015:")))))))));
+                 var initDegrees = $Basics.degrees(-40);
+                 var src = "manateeRight.png";
+                 var manatee = $Graphics$Collage.rotate(m.angle)($Graphics$Collage.rotate(initDegrees)($Graphics$Collage.toForm(A3($Graphics$Element.image,
+                 110,
+                 110,
+                 src))));
+                 var $ = {ctor: "_Tuple2"
+                         ,_0: $Basics.toFloat(_v0._0)
+                         ,_1: $Basics.toFloat(_v0._1)},
+                 w = $._0,
+                 h = $._1;
+                 var oceanWave = $Graphics$Collage.move({ctor: "_Tuple2"
+                                                        ,_0: (0 - w) / 2
+                                                        ,_1: (0 - h) / 20})($Graphics$Collage.traced(_U.replace([["width"
+                                                                                                                 ,14]
+                                                                                                                ,["color"
+                                                                                                                 ,$Color.blue]],
+                 $Graphics$Collage.defaultLine))($Graphics$Collage.path(A2($List.map,
+                 function (x) {
+                    return {ctor: "_Tuple2"
+                           ,_0: x
+                           ,_1: $Basics.sin(5.0e-2 * x) * 6};
+                 },
+                 _L.range(0,w)))));
+                 var sandWave = $Graphics$Collage.move({ctor: "_Tuple2"
+                                                       ,_0: (0 - w) / 2
+                                                       ,_1: -3 * h / 8})($Graphics$Collage.traced(_U.replace([["width"
+                                                                                                              ,14]
+                                                                                                             ,["color"
+                                                                                                              ,A3($Color.rgb,
+                                                                                                              57,
+                                                                                                              39,
+                                                                                                              27)]],
+                 $Graphics$Collage.defaultLine))($Graphics$Collage.path(A2($List.map,
+                 function (x) {
+                    return {ctor: "_Tuple2"
+                           ,_0: x
+                           ,_1: $Basics.cos(3.0e-2 * x) * 5};
+                 },
+                 _L.range(0,w)))));
+                 var moon = $Graphics$Collage.move({ctor: "_Tuple2"
+                                                   ,_0: 400
+                                                   ,_1: 7 * h / 20})($Graphics$Collage.toForm(A3($Graphics$Element.image,
+                 160,
+                 160,
+                 "moon.png")));
+                 var neptune = $Graphics$Collage.rotate(m.planetRotation)($Graphics$Collage.move({ctor: "_Tuple2"
+                                                                                                 ,_0: -400
+                                                                                                 ,_1: 6 * h / 20})($Graphics$Collage.toForm(A3($Graphics$Element.image,
+                 300,
+                 300,
+                 "Neptune.png"))));
+                 var iss = $Graphics$Collage.move({ctor: "_Tuple2"
+                                                  ,_0: 200
+                                                  ,_1: (0 - 3 * h) / 20})($Graphics$Collage.toForm(A3($Graphics$Element.image,
+                 135,
+                 150,
+                 "ISS.png")));
+                 var starfish1 = $Graphics$Collage.move({ctor: "_Tuple2"
+                                                        ,_0: 100
+                                                        ,_1: -3 * h / 8 - h / 16})($Graphics$Collage.toForm(A3($Graphics$Element.image,
+                 80,
+                 80,
+                 "starfish1.png")));
+                 var starfish2 = $Graphics$Collage.move({ctor: "_Tuple2"
+                                                        ,_0: -200
+                                                        ,_1: -3 * h / 8 - h / 16})($Graphics$Collage.toForm(A3($Graphics$Element.image,
+                 70,
+                 70,
+                 "starfish2.png")));
+                 var starfish3 = $Graphics$Collage.move({ctor: "_Tuple2"
+                                                        ,_0: -500
+                                                        ,_1: -3 * h / 8 - h / 16})($Graphics$Collage.toForm(A3($Graphics$Element.image,
+                 90,
+                 90,
+                 "starfish3.png")));
+                 var crab = $Graphics$Collage.move({ctor: "_Tuple2"
+                                                   ,_0: m.crabX
+                                                   ,_1: -3 * h / 8 - h / 16})($Graphics$Collage.toForm(A3($Graphics$Element.image,
+                 100,
+                 70,
+                 "crab.png")));
+                 var ocean = $Graphics$Collage.filled(A3($Color.rgb,
+                 40,
+                 100,
+                 150))(A2($Graphics$Collage.rect,
+                 w,
+                 h));
+                 var sky = $Graphics$Collage.move({ctor: "_Tuple2"
+                                                  ,_0: 0
+                                                  ,_1: 9 * h / 20})($Graphics$Collage.filled(A3($Color.rgb,
+                 0,
+                 0,
+                 0))(A2($Graphics$Collage.rect,
+                 w,
+                 h)));
+                 var skyAll = $Graphics$Collage.filled(A3($Color.rgb,
+                 0,
+                 0,
+                 0))(A2($Graphics$Collage.rect,
+                 w,
+                 h));
+                 var ground = $Graphics$Collage.move({ctor: "_Tuple2"
+                                                     ,_0: 0
+                                                     ,_1: -3 * h / 8 - h / 16})($Graphics$Collage.filled(A3($Color.rgb,
+                 61,
+                 43,
+                 31))(A2($Graphics$Collage.rect,
+                 w,
+                 h / 8)));
+                 var depth = $Graphics$Collage.move({ctor: "_Tuple2"
+                                                    ,_0: 4 * w / 10
+                                                    ,_1: (0 - h) / 3})($Graphics$Collage.toForm($Text.leftAligned($Text.typeface(_L.fromArray(["futura"]))($Text.bold($Text.height(25)(A2($Basics.flip,
+                 $Text.append,
+                 depthEnd)($Text.append(depthFrnt)($Text.color($Color.yellow)($Text.fromString($Basics.toString($Basics.floor((m.y - h / 15) / 10))))))))))));
+                 var depthWhit = $Graphics$Collage.move({ctor: "_Tuple2"
+                                                        ,_0: 4 * w / 10
+                                                        ,_1: (0 - h) / 3})($Graphics$Collage.toForm($Text.leftAligned($Text.typeface(_L.fromArray(["futura"]))($Text.bold($Text.height(25)(A2($Basics.flip,
+                 $Text.append,
+                 depthEndWhit)($Text.append(depthFrntWhit)($Text.color($Color.yellow)($Text.fromString($Basics.toString($Basics.floor((m.y - h / 15) / 10))))))))))));
+                 var speed = $Graphics$Collage.move({ctor: "_Tuple2"
+                                                    ,_0: 4 * w / 10
+                                                    ,_1: (0 - h) / 3 + 40})($Graphics$Collage.toForm($Text.leftAligned($Text.typeface(_L.fromArray(["futura"]))($Text.bold($Text.height(25)(A2($Basics.flip,
+                 $Text.append,
+                 speedEnd)($Text.append(speedFrnt)($Text.color($Color.yellow)($Text.fromString($Basics.toString($Basics.floor(m.speed * 100))))))))))));
+                 var speedWhit = $Graphics$Collage.move({ctor: "_Tuple2"
+                                                        ,_0: 4 * w / 10
+                                                        ,_1: (0 - h) / 3 + 40})($Graphics$Collage.toForm($Text.leftAligned($Text.typeface(_L.fromArray(["futura"]))($Text.bold($Text.height(25)(A2($Basics.flip,
+                 $Text.append,
+                 speedEndWhit)($Text.append(speedFrntWhit)($Text.color($Color.yellow)($Text.fromString($Basics.toString($Basics.floor(m.speed * 100))))))))))));
+                 return _U.cmp(m.y,
+                 h / 2 + 3 * h / 20) > -1 ? A3($Graphics$Collage.collage,
+                 _v0._0,
+                 _v0._1,
+                 _L.fromArray([skyAll
+                              ,neptune
+                              ,iss
+                              ,title
+                              ,subTitle
+                              ,$Graphics$Collage.move({ctor: "_Tuple2"
+                                                      ,_0: m.x
+                                                      ,_1: m.y - h - 3 * h / 20})(manatee)
+                              ,depthWhit
+                              ,speedWhit])) : _U.cmp(m.y,
+                 (0 - h) / 2 + 3 * h / 20) > -1 ? A3($Graphics$Collage.collage,
+                 _v0._0,
+                 _v0._1,
+                 _L.fromArray([ocean
+                              ,sky
+                              ,oceanWave
+                              ,moon
+                              ,title
+                              ,subTitle
+                              ,$Graphics$Collage.move({ctor: "_Tuple2"
+                                                      ,_0: m.x
+                                                      ,_1: m.y - 3 * h / 20})(manatee)
+                              ,depth
+                              ,speed])) : A3($Graphics$Collage.collage,
+                 _v0._0,
+                 _v0._1,
+                 _L.fromArray([ocean
+                              ,ground
+                              ,sandWave
+                              ,starfish1
+                              ,starfish2
+                              ,starfish3
+                              ,crab
+                              ,title
+                              ,subTitle
+                              ,$Graphics$Collage.move({ctor: "_Tuple2"
+                                                      ,_0: m.x
+                                                      ,_1: m.y - 3 * h / 20 + h})(manatee)
+                              ,depth
+                              ,speed]));
+              }();}
+         _U.badCase($moduleName,
+         "between lines 85 and 249");
+      }();
+   });
+   var rotatePlanet = function (m) {
+      return _U.replace([["planetRotation"
+                         ,m.planetRotation + 1.0 / 4]],
+      m);
+   };
+   var moveCrab = F2(function (w,
+   m) {
+      return m.crabGoRight && _U.cmp(m.crabX,
+      w / 2) > 0 ? _U.replace([["crabGoRight"
+                               ,false]
+                              ,["crabX",m.crabX - 3]],
+      m) : $Basics.not(m.crabGoRight) && _U.cmp(m.crabX,
+      (0 - w) / 2) < 0 ? _U.replace([["crabGoRight"
+                                     ,true]
+                                    ,["crabX",m.crabX + 3]],
+      m) : m.crabGoRight ? _U.replace([["crabX"
+                                       ,m.crabX + 3]],
+      m) : $Basics.not(m.crabGoRight) ? _U.replace([["crabX"
+                                                    ,m.crabX - 3]],
+      m) : _U.badIf($moduleName,
+      "between lines 64 and 67");
+   });
+   var toggleTitleOpacity = function (m) {
+      return _U.cmp(m.titleOpac,
+      0) > 0 ? _U.replace([["titleOpac"
+                           ,m.titleOpac - 5.0e-3]],
+      m) : _U.replace([["titleOpac"
+                       ,0]],
+      m);
+   };
+   var update_position = F2(function (t,
+   m) {
+      return m.jumped ? _U.replace([["x"
+                                    ,m.speed * $Basics.cos(m.jumpAngle) * m.t + m.xInit]
+                                   ,["y"
+                                    ,m.speed * $Basics.sin(m.jumpAngle) * m.t - 3.0e-4 * m.t * m.t + m.yInit]
+                                   ,["t",m.t + t]],
+      m) : _U.replace([["x"
+                       ,m.x + t * m.speed * $Basics.cos(m.angle)]
+                      ,["y"
+                       ,m.y + t * m.speed * $Basics.sin(m.angle)]],
+      m);
+   });
+   var checkHorizontalBounds = F2(function (w,
+   m) {
+      return function () {
+         var dir = $Basics.cos(m.angle);
+         var rightBound = w / 2;
+         var leftBound = (0 - w) / 2;
+         return _U.cmp(m.x,
+         leftBound) < 0 && _U.cmp(dir,
+         0) < 0 ? _U.replace([["x"
+                              ,rightBound]],
+         m) : _U.cmp(m.x,
+         rightBound) > 0 && _U.cmp(dir,
+         0) > 0 ? _U.replace([["x"
+                              ,leftBound]],
+         m) : m;
+      }();
+   });
+   var checkVerticalBounds = F2(function (h,
+   m) {
+      return function () {
+         var initSpeed = $Basics.abs($Basics.sin(m.angle) * (m.speed + 0.1) * $Basics.sin(m.jumpAngle));
+         var dir = $Basics.sin(m.angle);
+         var lineDown = 0 - h - 3 * h / 16;
+         var lineUp = 0.7 * h / 10;
+         return _U.cmp(lineDown,
+         m.y) < 0 && (_U.cmp(m.y,
+         lineUp) < 0 && m.jumped) ? _U.replace([["speed"
+                                                ,initSpeed]
+                                               ,["jumped",false]],
+         m) : _U.cmp(lineDown,
+         m.y) < 0 && _U.cmp(m.y,
+         lineUp) < 0 || m.jumped ? m : _U.cmp(m.y,
+         lineUp) > 0 && $Basics.not(m.jumped) ? _U.replace([["jumped"
+                                                            ,true]
+                                                           ,["jumpAngle"
+                                                            ,m.angle]
+                                                           ,["t",0]
+                                                           ,["xInit",m.x]
+                                                           ,["yInit",m.y]],
+         m) : _U.cmp(dir,
+         0) < 0 ? _U.replace([["speed",0]
+                             ,["y",lineDown + 75]],
+         m) : m;
+      }();
+   });
+   var update_speed = F2(function (y,
+   m) {
+      return m.jumped ? m : _U.eq(y,
+      1) && _U.cmp(m.speed,
+      0.35) < 0 ? _U.replace([["speed"
+                              ,m.speed + 8.0e-3]],
+      m) : _U.eq(y,
+      1) && _U.cmp(m.speed,
+      0.6) < 0 ? _U.replace([["speed"
+                             ,m.speed + 4.0e-3]],
+      m) : !_U.eq(y,
+      1) && _U.cmp(m.speed,
+      0) > 0 ? _U.replace([["speed"
+                           ,m.speed - 1.0e-2]],
+      m) : !_U.eq(y,
+      1) && _U.cmp(m.speed,
+      0) < 0 ? _U.replace([["speed"
+                           ,0]],
+      m) : m;
+   });
+   var update_angle = F2(function (x,
+   m) {
+      return m.jumped ? _U.replace([["angle"
+                                    ,m.angle - $Basics.toFloat(x) / 5]],
+      m) : _U.replace([["angle"
+                       ,m.angle - m.speed * $Basics.toFloat(x) / 3]],
+      m);
+   });
+   var step = function (_v4) {
+      return function () {
+         switch (_v4.ctor)
+         {case "_Tuple3":
+            switch (_v4._2.ctor)
+              {case "_Tuple2":
+                 return function ($) {
+                      return rotatePlanet(moveCrab($Basics.toFloat(_v4._2._0))(toggleTitleOpacity(checkVerticalBounds($Basics.toFloat(_v4._2._1))(checkHorizontalBounds($Basics.toFloat(_v4._2._0))(update_position(_v4._0)(update_speed(_v4._1.y)(update_angle(_v4._1.x)($))))))));
+                   };}
+              break;}
+         _U.badCase($moduleName,
+         "between lines 74 and 81");
+      }();
+   };
+   var manateeSim = {_: {}
+                    ,angle: 0
+                    ,crabGoRight: true
+                    ,crabX: 0
+                    ,jumpAngle: 0
+                    ,jumped: false
+                    ,planetRotation: 0
+                    ,speed: 0
+                    ,t: 0
+                    ,titleOpac: 1
+                    ,x: 0
+                    ,xInit: 0
+                    ,y: 0
+                    ,yInit: 0};
+   var main = A3($Signal.map2,
+   render,
+   $Window.dimensions,
+   A3($Signal.foldp,
+   step,
+   manateeSim,
+   input));
+   var State = function (a) {
+      return function (b) {
+         return function (c) {
+            return function (d) {
+               return function (e) {
+                  return function (f) {
+                     return function (g) {
+                        return function (h) {
+                           return function (i) {
+                              return function (j) {
+                                 return function (k) {
+                                    return function (l) {
+                                       return function (m) {
+                                          return {_: {}
+                                                 ,angle: c
+                                                 ,crabGoRight: h
+                                                 ,crabX: i
+                                                 ,jumpAngle: g
+                                                 ,jumped: f
+                                                 ,planetRotation: j
+                                                 ,speed: d
+                                                 ,t: k
+                                                 ,titleOpac: e
+                                                 ,x: a
+                                                 ,xInit: l
+                                                 ,y: b
+                                                 ,yInit: m};
+                                       };
+                                    };
+                                 };
+                              };
+                           };
+                        };
+                     };
+                  };
+               };
+            };
+         };
+      };
+   };
+   _elm.Main.values = {_op: _op
+                      ,State: State
+                      ,manateeSim: manateeSim
+                      ,update_angle: update_angle
+                      ,update_speed: update_speed
+                      ,checkVerticalBounds: checkVerticalBounds
+                      ,checkHorizontalBounds: checkHorizontalBounds
+                      ,update_position: update_position
+                      ,toggleTitleOpacity: toggleTitleOpacity
+                      ,moveCrab: moveCrab
+                      ,rotatePlanet: rotatePlanet
+                      ,step: step
+                      ,render: render
+                      ,input: input
+                      ,main: main};
+   return _elm.Main.values;
+};
