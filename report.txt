@@ -59,5 +59,5 @@ Some Ideas that were considered but were not implemented due to lack of time:
     - Making it possible for the  manatee to eat fish which would be placed in the ocean by swimming over them. 
       And the manatee would "grow larger" in a surreal way in which another manatee of another size would just be linked to its tail,  
       forming a linked list of manatees.
-    - Have a pill placed somewhere in the air or ocean that when the manatee moves over, will change the background scenary to something
-      psychedelic. Randomized to a bright scenary or a dark one depending on the trip. 
+    - Have a pill placed somewhere in the air or ocean that when the manatee moves over, will change the background scenery to something
+      psychedelic. Randomized to a bright scenery or a dark one depending on the trip. 
