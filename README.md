@@ -1,6 +1,6 @@
 # ElmGame
 
-A game I made in Elm for my Functional Languages Class. 
+A game I made in Elm for my Functional Programming Class. 
 
 The game can be played by running Manatee.html. <br /> 
 Use the arrow keys to play: up to accelerate, right and left to rotate. <br />
